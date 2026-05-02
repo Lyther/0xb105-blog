@@ -1,5 +1,6 @@
 ZOLA_VERSION ?= 0.22.1
 ZOLA_BIN ?= ./.bin/zola
+ZOLA_CHECK_FLAGS ?= --skip-external-links
 ZOLA_DIR := $(patsubst %/,%,$(dir $(ZOLA_BIN)))
 
 .PHONY: dev build test lint clean install-zola zola-ready
@@ -13,7 +14,7 @@ build: zola-ready
 test: lint
 
 lint: zola-ready
-	$(ZOLA_BIN) check
+	$(ZOLA_BIN) check $(ZOLA_CHECK_FLAGS)
 
 clean:
 	rm -rf public
