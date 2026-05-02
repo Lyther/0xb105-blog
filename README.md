@@ -35,7 +35,7 @@ GitHub Pages deploys from `.github/workflows/pages.yml` on pushes to `main`.
 Set the GitHub Pages source to GitHub Actions, then configure DNS:
 
 ```text
-blog.0xb105.com.  CNAME  lyther.github.io.
+blog.0xb105.com  CNAME  lyther.github.io
 ```
 
 `static/CNAME` keeps the custom domain attached after each deploy.
