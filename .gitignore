@@ -1,0 +1,45 @@
+.DS_Store
+Thumbs.db
+
+# Zola
+public/
+.bin/
+
+# Build artifacts
+target/
+dist/
+build/
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.lock
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Local IDE and agent overlays
+.idea/
+.vscode/
+.claude/
+.obsidian/
+.cursor/
+.gemini/
+.agent/
+.cursorrules
+.geminirules
+.roorules
+.clinerules
+.traerules
+.windsurfrules
+.cursorignore
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+*.code-workspace

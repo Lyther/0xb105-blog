@@ -1,0 +1,58 @@
+name: pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  ZOLA_VERSION: 0.22.1
+  ZOLA_BIN: /home/runner/.local/bin/zola
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/cache@v4
+        with:
+          path: /home/runner/.local/bin/zola
+          key: zola-${{ runner.os }}-${{ env.ZOLA_VERSION }}
+
+      - name: Install Zola
+        run: scripts/install-zola.sh "$ZOLA_VERSION" "$(dirname "$ZOLA_BIN")"
+
+      - name: Check
+        run: make lint ZOLA_BIN="$ZOLA_BIN"
+
+      - name: Build
+        run: make build ZOLA_BIN="$ZOLA_BIN"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

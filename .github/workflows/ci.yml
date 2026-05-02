@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  ZOLA_VERSION: 0.22.1
+  ZOLA_BIN: /home/runner/.local/bin/zola
+
+jobs:
+  site:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/cache@v4
+        with:
+          path: /home/runner/.local/bin/zola
+          key: zola-${{ runner.os }}-${{ env.ZOLA_VERSION }}
+
+      - name: Install Zola
+        run: |
+          scripts/install-zola.sh "$ZOLA_VERSION" "$(dirname "$ZOLA_BIN")"
+
+      - name: Lint
+        run: make lint ZOLA_BIN="$ZOLA_BIN"
+
+      - name: Build
+        run: make build ZOLA_BIN="$ZOLA_BIN"

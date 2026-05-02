@@ -1,0 +1,56 @@
+base_url = "https://blog.0xb105.com"
+title = "0xb105"
+description = "Security research, CTF writeups, Linux kernel patches, CVE analysis, and open-source side projects by Catherine Li."
+theme = "terminimal"
+
+compile_sass = true
+build_search_index = true
+generate_feeds = true
+feed_filenames = ["rss.xml", "atom.xml"]
+
+taxonomies = [{ name = "tags", feed = true }]
+
+[markdown]
+smart_punctuation = true
+external_links_target_blank = true
+external_links_no_follow = true
+external_links_no_referrer = true
+
+[markdown.highlighting]
+theme = "github-dark"
+style = "inline"
+error_on_missing_language = true
+
+[link_checker]
+skip_prefixes = ["https://cpctf.trap.jp/"]
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+[extra]
+accent_color = "blue"
+background_color = "dark"
+logo_text = "0xb105"
+author = "Catherine Li"
+author_email = "enderaoelyther@gmail.com"
+menu_items = [
+  { name = "blog", url = "$BASE_URL" },
+  { name = "ctf", url = "$BASE_URL/ctf" },
+  { name = "research", url = "$BASE_URL/research" },
+  { name = "kernel", url = "$BASE_URL/kernel" },
+  { name = "cve", url = "$BASE_URL/cve" },
+  { name = "projects", url = "$BASE_URL/projects" },
+  { name = "services", url = "$BASE_URL/services" },
+  { name = "ethics", url = "$BASE_URL/ethics" },
+  { name = "disclosure", url = "$BASE_URL/disclosure" },
+  { name = "tags", url = "$BASE_URL/tags" },
+  { name = "archive", url = "$BASE_URL/archive" },
+  { name = "about", url = "$BASE_URL/about" },
+  { name = "github", url = "https://github.com/Lyther", newtab = true },
+]
+enable_post_view_navigation = true
+post_view_navigation_prompt = "Thanks for reading. More posts:"
+use_full_hack_font = true
+page_titles = "combined"
